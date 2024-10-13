@@ -1,26 +1,14 @@
 #!/usr/bin/bash
 set -e
-pw_file=$HOME/.einstein-passwd-v2.txt
-secret="Eey6ahchDoho5yu5"
-
-decrypt_pass ()
-{
-    password=$(openssl enc -d -pbkdf2 -aes256 -base64 -pass pass:$secret -in $pw_file)
-}
-
 
 username=$(whoami)
-password=""
-decrypt_pass
-
-EINSTEIN_URL="https://$1.computing.dcu.ie/einstein/stats/uploads?user=$username"
+password=$(peget -r)
 
 if [ password == "" ]
 then
    password=$(read -sp "Enter your dcu password: ")
 fi
-
-curl $EINSTEIN_URL --location --header "x-ssh_client: $ssh_client" --silent --config - $argv <<< "user = \"$username:$password\"" -o graph-data-temp.txt
+eget $1 "stats/uploads?user=$username" graph-data-temp.txt
 c=0
 i=0
 for _fn in `cat graph-data-temp.txt`; do
@@ -52,9 +40,9 @@ do
     fi
     c=$((c+2))
 done
-bar="${bar}\e[0m ]"
+bar="${bar}\e[0m]"
 echo
 echo -e $bar
 echo
-echo -e "You have completed \e[1;32m$percentage%\e[0m of tasks."
-# rm graph-data-temp.txt
+echo -e "You have completed $C_GREEN$percentage%$C_RESET of tasks."
+rm graph-data-temp.txt

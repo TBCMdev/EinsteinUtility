@@ -1,8 +1,8 @@
 # **DCU CompSci Addons**
 
-This repo holds script addons for your DCU account.
+This repo holds script addons for DCU Einstein and the linux terminal.
 
-- Note: *most scripts here wont work from home as 2FA is required. run these cmds on a linux machine in the labs for accurate results.*
+- NOTE: *Setup coming soon, run setup.sh for now*
 
 ## Scripts
 
